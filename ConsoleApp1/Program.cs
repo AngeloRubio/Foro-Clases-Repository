@@ -27,6 +27,14 @@ class Program
         await guardarEstudianteAsync();
 
         //consultarAlumnosyCursos();
+
+        //await agregarEstudiante();
+        //await consultarEstudiantes();
+        //await consultarEstudiante();
+        //await modificarEstudiante();
+        //await eliminarEstudiante();
+
+
     }
 
     public static async Task guardarEstudianteAsync()
@@ -56,19 +64,10 @@ class Program
         Console.WriteLine("Guardar EstudianteCurso");
         SchoolContext context = new SchoolContext();
         StudentCourse stdCourse = new StudentCourse();
-        /*
-        Student std = new Student();
-        std = context.Students.Find(1);
-        
-        Course course = new Course();
-        course = context.Courses.Find(1);
-        */
+
         stdCourse.CourseId = 3;//course.CourseId;
         stdCourse.StudentId = 3; //std.StudentId;
-        /*
-        stdCourse.Student = std;
-        stdCourse.Course = course;
-        */
+
         context.StudentCourses.Add(stdCourse);
         context.SaveChanges();
     }
@@ -138,7 +137,6 @@ class Program
     public static void consultarDirecciones()
     {
         Console.WriteLine("Consultar direcciones");
-        //Console.WriteLine("Metodo consultar estudiante por Id");
         SchoolContext context = new SchoolContext();
         List<StudentAddress> listaDirecciones;
         listaDirecciones = context.StudentAddresses
@@ -158,7 +156,6 @@ class Program
     public static void consultarDireccion()
     {
         Console.WriteLine("Consultar direccion por Id");
-        //Console.WriteLine("Metodo consultar estudiante por Id");
         SchoolContext context = new SchoolContext();
         StudentAddress address = new StudentAddress();
         address = context.StudentAddresses
@@ -188,11 +185,6 @@ class Program
             .Reference(x => x.Student)
             .Load();
 
-        /*
-        context.Entry(address)
-          .Collection(x => x.Student)
-          .Load();
-        */
 
         Console.WriteLine("Codigo: " + address.Student.StudentId +
                 " Nombre: " + address.Student.Name +
@@ -257,6 +249,7 @@ class Program
 
 
     }
+
     //agregar estudiante
     public static void agregarEstudiante()
     {
@@ -331,9 +324,6 @@ class Program
 
         Console.WriteLine("Primer elemento de la tabla:" +  std.StudentId +"-" +std.Name);
 
-        //listEstudiantes = context.Students.Where(s => s.StudentId > 2 && s.Name == "Anita").ToList();
-
-        //listEstudiantes = context.Students.Where(s => s.Name == "Patty" || s.Name == "Anita").ToList();
 
         listEstudiantes = context.Students.Where(s => s.Name.StartsWith("A")).ToList();
 
@@ -341,23 +331,6 @@ class Program
         {
             Console.WriteLine("Codigo: " + item.StudentId + " Nombre: " + item.Name);
         }
-
-
-        /*
-        var query = context.Students.GroupBy( s => s.Name) 
-        .Select(g => new
-        {
-            Nombre = g.Key,
-            Cantidad = g.Count()
-        }). ToList();
-
-        foreach (var result in query)
-        {
-            Console.WriteLine($"Nombre: {result.Nombre}, Cantidad: {result.Cantidad}");
-        }
-        */
-
-
 
 
 
